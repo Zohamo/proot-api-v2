@@ -2,11 +2,10 @@
 
 namespace App\Controllers;
 
-use App\Controllers;
+use App\Functions\HttpUtils;
 use App\Models\ArtistModel;
-use Core\AbstractControllerApi;
 
-class ArtistsControllerApi extends AbstractControllerApi
+class ArtistsControllerApi
 {
     /**
      * Modèle associé au contrôleur.
@@ -26,9 +25,34 @@ class ArtistsControllerApi extends AbstractControllerApi
     public function __construct()
     {
         $this->model = new ArtistModel();
-        $this->actions = array_fill_keys(
-            ['create', 'update'],
-            (new ArtistsController)->actions['updateOrCreate']
-        );
+    }
+
+    /**
+     * Renvoie une liste de toutes les ressources.
+     *
+     * @route("/artists", methods={"GET"})
+     */
+    public function getAll()
+    {
+        HttpUtils::jsonResponse($this->model->all());
+    }
+
+    /**
+     * Renvoie la ressource spécifiée.
+     *
+     * @param  string $id
+     * @route("/artists/{id}", methods={"GET"})
+     */
+    public function get($id)
+    {
+        $res = $this->model->toArray()
+            ->where($this->model->pk() . " = ?")
+            ->select([$id]);
+
+        if (empty($res)) {
+            HttpUtils::jsonResponse(null, 404);
+        } else {
+            HttpUtils::jsonResponse($res[0]);
+        }
     }
 }

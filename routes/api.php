@@ -14,26 +14,22 @@ use Core\Router;
  * exemple : "roles/{id:\d+}/modifier", ici 'id' n'accepte que les chiffres.
  */
 
-// Alertes
-Router::get("api/alerts", "Tools\AlertsControllerApi", "getAll");
-
-// Logs
-Router::api("api/logs", "LogsControllerApi", AppConstants::ID_ROLE_DEV);
-
-// Users
-Router::api("api/users", "UsersControllerApi", AppConstants::ID_ROLE_ADMIN);
-
 // Artists
-Router::api("api/artists", "ArtistsControllerApi");
+Router::get("artists", "ArtistsControllerApi", "getAll");
+Router::get("artists/{id}", "ArtistsControllerApi", "get");
 
 // Movies
-Router::api("api/movies", "MoviesControllerApi");
+Router::get("movies", "MoviesControllerApi", "getAll");
+Router::get("movies/{id}", "MoviesControllerApi", "get");
 
 // Products
-Router::api("api/products", "ProductsControllerApi");
+Router::get("products", "ProductsControllerApi", "getAll");
+Router::get("products/{id}", "ProductsControllerApi", "get");
 
 // Proojects
-Router::api("api/proojects", "ProojectsControllerApi");
+Router::get("proojects", "ProojectsControllerApi", "getAll");
+Router::get("proojects/{id}", "ProojectsControllerApi", "get");
 
 // Releases
-Router::api("api/releases", "ReleasesControllerApi");
+Router::get("releases", "ReleasesControllerApi", "getAll");
+Router::get("releases/{id}", "ReleasesControllerApi", "get");
