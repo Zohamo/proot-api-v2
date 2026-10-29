@@ -3,12 +3,9 @@
 namespace App\Models;
 
 use Core\AbstractModel;
-use Core\ModelQueriesTrait;
 
 class MovieModel extends AbstractModel
 {
-    use ModelQueriesTrait;
-
     /**
      * Nom de la table correspondant au modèle.
      *
@@ -64,11 +61,28 @@ class MovieModel extends AbstractModel
     /**
      * Renvoie la liste des tous les modèles enregistrés.
      *
-     * @return \App\Entities\Movie[]|mixed[]
+     * @return mixed[]
      */
     public function all()
     {
-        return $this->fields('id', 'slug', 'title', 'artist', 'embed', 'description', 'created_at', 'updated_at')
-            ->order("created_at ASC")->select();
+        return $this->fields('id', 'slug', 'title', 'artist', 'embed', 'description', 'DATE_FORMAT(created_at, "%Y-%m-%dT%H:%i:%s.%fZ") AS createdAt', 'DATE_FORMAT(updated_at, "%Y-%m-%dT%H:%i:%s.%fZ") AS updatedAt')
+            ->order("createdAt DESC")
+            ->toArray()->select();
+    }
+
+    /**
+     * Renvoie le premier modèle trouvé, respectant les critères `$params`.
+     *
+     * @param  int|string|array $params
+     * @return mixed[]|boolean Renvoie `false` si aucun modèle ne correspond aux critères demandés.
+     */
+    public function first(...$params)
+    {
+        $res = $this->fields('id', 'slug', 'title', 'artist', 'embed', 'description', 'DATE_FORMAT(created_at, "%Y-%m-%dT%H:%i:%s.%fZ") AS createdAt', 'DATE_FORMAT(updated_at, "%Y-%m-%dT%H:%i:%s.%fZ") AS updatedAt')
+            ->where("slug = ?")
+            ->limit(1)
+            ->toArray()
+            ->select([$params[0]]);
+        return empty($res) ? false : $res[0];
     }
 }
