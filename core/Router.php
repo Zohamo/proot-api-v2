@@ -109,9 +109,6 @@ class Router
         if (!$route) {
             throw new \DomainException("La page que vous recherchez n'existe pas.", 404);
         }
-        if (!self::hasAccess($route->allowedRoles)) {
-            throw new \DomainException("Vous n'avez pas les droits suffisants pour accéder à cette page.", 403);
-        }
 
         $controllerName = $route->controller;
         if (!class_exists($controllerName)) {
@@ -178,7 +175,7 @@ class Router
     {
         foreach (self::$routes as $route) {
             if (
-                $_SERVER['REQUEST_METHOD'] === $route->method
+                $_SERVER['REQUEST_METHOD'] === "GET"
                 && preg_match($route->url, $currentUrl, $matches)
             ) {
                 // Récupère les paramètres de route
@@ -190,31 +187,6 @@ class Router
                 return $route;
             }
         }
-        return false;
-    }
-
-    /**
-     * Vérifie si la route nécessite un droit d'accès
-     * et/ou si l'utilisateur authentifié le détient.
-     *
-     * @param  integer[] $allowedRoles
-     * @return boolean
-     */
-    private static function hasAccess(array $allowedRoles)
-    {
-        if (
-            empty($allowedRoles) || Auth::$user->isDev() ||
-            (in_array(\AppConstants::ID_ROLE_DEV, $allowedRoles) && Auth::$user->isDev())
-        ) {
-            return true;
-        }
-
-        foreach ($allowedRoles as $allowedRole) {
-            if ($allowedRole === Auth::$user->fk_role_id) {
-                return true;
-            }
-        }
-
         return false;
     }
 }
