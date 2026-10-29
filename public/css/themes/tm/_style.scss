@@ -1,0 +1,91 @@
+@import "buttons";
+@import "tables";
+@import "type";
+
+// Badges
+.badge {
+  padding-bottom: 0.5em;
+}
+
+// Navbar
+.navbar {
+  a.navbar-brand {
+    letter-spacing: 0.03em;
+    &:hover,
+    &:active,
+    &:focus {
+      color: $primary;
+    }
+  }
+  ul.navbar-nav .nav-item {
+    letter-spacing: 0.03em;
+    a.nav-link,
+    &.nav-item-title {
+      text-transform: uppercase;
+      font-size: 0.875rem;
+    }
+  }
+}
+
+// Headings
+h1,
+.h1 {
+  margin-bottom: 0;
+}
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
+  letter-spacing: 0.03em;
+  font-weight: 700;
+}
+.pre-title {
+  margin-bottom: 0.3rem;
+  font-size: 1.5rem;
+  line-height: 1.75rem;
+  letter-spacing: 0.03em;
+  font-weight: 300;
+  order: -1;
+}
+
+// Breadcrumbs
+.breadcrumb-item {
+  &.active {
+    color: $body-color;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+  }
+  a:not(:hover, :active, :focus) {
+    text-decoration: none;
+  }
+}
+
+// Button back to top
+.back-to-top {
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  background-color: $white;
+  box-sizing: border-box;
+  border: 0.1rem solid $linen;
+  text-decoration: none;
+  text-align: center;
+  font-size: 1.1rem;
+  color: $accent;
+  transition: opacity 1s ease 0s, transform 0s ease 0s;
+  transform: translateX(0);
+}
+
+// Debug bar
+#debugTabList.nav-pills .nav-link {
+  color: $flame;
+}

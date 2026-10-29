@@ -1,0 +1,82 @@
+// Button back to top
+.back-to-top {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 10000;
+}
+
+// Cursor
+.cursor-help {
+  cursor: help !important;
+}
+.cursor-move,
+.handle,
+[draggable] {
+  cursor: move;
+}
+.cursor-pointer,
+[data-bs-toggle="popover"] {
+  cursor: pointer;
+}
+
+// Form
+[required] + label.form-label:after {
+  content: "*";
+}
+.form-hint {
+  text-align: right;
+  font-size: 0.8em;
+  color: rgba(var(--bs-body-color-rgb), 0.65);
+  margin-bottom: 0;
+}
+
+// Link
+a .fa,
+a:hover .fa,
+a:active .fa,
+a:visited .fa,
+a:link .fa {
+  color: initial;
+  text-decoration: none;
+}
+
+// List
+.list-style-folder {
+  list-style-image: url("../img/icons/folder-solid.svg");
+}
+.list-style-tree {
+  list-style: none;
+  li::before {
+    content: "\02514";
+    margin-right: 0.5rem;
+    color: $gray-100;
+  }
+}
+
+// Spinner
+.spinner-fullsize {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: #f8f9fa;
+  z-index: 5000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .spinner-border {
+    border-width: 10px;
+    width: 100px;
+    height: 100px;
+  }
+}
+
+// Texte
+.text-justify {
+  text-align: justify;
+}
+.break-word {
+  overflow-wrap: anywhere;
+}

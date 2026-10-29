@@ -1,0 +1,22 @@
+a {
+  transition: all 0.2s ease-in-out;
+}
+table a,
+a:hover,
+a:focus,
+a:active,
+h2 {
+  color: $accent;
+}
+table a:not(:hover, :focus, :active) {
+  text-decoration: none;
+}
+
+.lead {
+  line-height: 2.625rem;
+  letter-spacing: 0.03em;
+}
+
+ul li::marker {
+  color: $primary;
+}

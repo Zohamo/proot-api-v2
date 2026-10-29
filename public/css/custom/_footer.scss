@@ -1,0 +1,13 @@
+.main-footer .btn-help {
+  color: $gray-500;
+  flex-direction: column;
+  padding: 0.1rem 0.75rem;
+  &:hover {
+    color: $light;
+  }
+  &:active,
+  &:focus {
+    color: $light;
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-secondary-rgb), 0.5);
+  }
+}

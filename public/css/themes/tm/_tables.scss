@@ -1,0 +1,16 @@
+.table {
+  th,
+  td {
+    border-top: none;
+    border-bottom: 1px solid #e2e2e2;
+  }
+  thead td,
+  thead th {
+    border-bottom: 2px solid $black;
+  }
+  tfoot td,
+  tfoot th {
+    border-top: 2px solid $black;
+    border-bottom: none;
+  }
+}

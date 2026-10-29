@@ -1,0 +1,23 @@
+@import "../../node_modules/bootstrap/scss/functions";
+@import "custom/fonts";
+$font-family-base: "Roboto", sans-serif;
+// Insérer les variables ici, elles écraseront celles de Bootstrap
+@import "themes/default/variables";
+@import "themes/tm/variables";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins";
+
+// Ajout de types de couleurs personnalisées
+$custom-colors: (
+  "accent": $accent,
+);
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
+@import "custom/buttons";
+@import "custom/footer";
+@import "custom/header";
+@import "custom/page";
+@import "custom/structure";
+@import "custom/utilities";
+@import "themes/tm/style";

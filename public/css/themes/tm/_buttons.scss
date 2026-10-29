@@ -1,0 +1,82 @@
+.btn {
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  place-items: center;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-primary:not(:disabled):not(.disabled) {
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: $accent;
+    border-color: $accent;
+    color: $white;
+  }
+}
+
+.btn-outline-primary {
+  position: relative;
+  color: $black;
+  outline: none;
+  i {
+    color: $primary;
+  }
+  .fa-arrow-right {
+    transition: all 0.2s ease-in;
+    font-size: 0;
+  }
+  &:not(:disabled):not(.disabled):hover,
+  &:not(:disabled):not(.disabled):focus,
+  &:not(:disabled):not(.disabled):active {
+    background: none;
+    .fa-arrow-right {
+      font-size: inherit;
+    }
+  }
+  &:not(:disabled):not(.disabled)::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    bottom: -1px;
+    background: $primary;
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    transition: transform 0.2s ease-in;
+  }
+  &:hover:not(:disabled):not(.disabled),
+  &:focus:not(:disabled):not(.disabled),
+  &:active:not(:disabled):not(.disabled) {
+    i {
+      color: $black;
+    }
+    &::before {
+      transform: scaleX(1);
+    }
+  }
+  &.disabled,
+  &:disabled {
+    color: $gray;
+  }
+}
+.btn-outline-secondary {
+  color: $gray;
+}
+
+.btn-border-bottom-accent {
+  font-size: 1.6rem;
+  padding: 0.5rem 0;
+  border: none;
+  border-bottom: $btn-border-width solid $accent;
+  &:hover,
+  &:active,
+  &:focus {
+    color: $accent;
+    box-shadow: none;
+  }
+}

@@ -1,0 +1,60 @@
+.navbar {
+  padding-top: 0;
+  padding-bottom: 0;
+
+  .navbar-brand {
+    color: $white;
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  a.nav-link {
+    color: $gray-500;
+    padding: 0.5rem 0 0.3125rem;
+    border-bottom: 0.1875rem solid transparent;
+    font-weight: 700;
+    &:active,
+    &:hover,
+    &.active {
+      color: $navbar-dark-active-color;
+      border-bottom-color: $primary;
+    }
+  }
+
+  // Dropdown
+  .dropdown-title {
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    color: $gray-500;
+    font-size: 0.8rem;
+    margin-bottom: 0.1rem;
+  }
+
+  // Search
+  [data-bs-target="#modalMainSearch"],
+  #userDropdown {
+    color: $primary;
+    &:hover,
+    &:active,
+    &:focus {
+      color: $accent;
+    }
+  }
+
+  // Utilisateur + Aide
+  #userDropdown.dropdown-toggle::after {
+    display: none;
+  }
+  a#userDropdown.nav-link:active,
+  a#userDropdown.nav-link:hover,
+  a#userDropdown.nav-link.active,
+  a.btn-help.nav-link:active,
+  a.btn-help.nav-link:hover,
+  a.btn-help.nav-link.active {
+    border-bottom-color: transparent;
+  }
+}

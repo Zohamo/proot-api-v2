@@ -1,0 +1,45 @@
+.form-floating .select2-container--bootstrap-5 {
+  padding-top: 19px;
+  border: 1px solid #dee2e6;
+}
+.form-floating
+  .select2-container--bootstrap-5
+  + .form-floating
+  .select2-selection.select2-selection--single:focus,
+.form-floating
+  .select2-container--bootstrap-5
+  + .form-floating
+  .select2-container--bootstrap-5.select2-container--focus
+  .select2-selection,
+.form-floating
+  .select2-container--bootstrap-5
+  + .form-floating
+  .select2-container--bootstrap-5.select2-container--open
+  .select2-selection {
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+.form-floating .select2-selection.select2-selection--single {
+  border: none;
+}
+.form-floating .select2-selection.select2-selection--single:focus,
+.form-floating
+  .select2-container--bootstrap-5.select2-container--focus
+  .select2-selection,
+.form-floating
+  .select2-container--bootstrap-5.select2-container--open
+  .select2-selection {
+  box-shadow: none;
+}
+.select2-container--bootstrap-5 + label {
+  padding-top: 16px;
+  z-index: 1;
+}
+
+.form-floating .select2-container--bootstrap-5.select2-container--open
+/*, .select2-container--bootstrap-5.select2-container--open .select2-dropdown--below*/ {
+  color: var(--bs-body-color);
+  background-color: var(--bs-form-control-bg);
+  border-color: #86b7fe;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
