@@ -3,12 +3,9 @@
 namespace App\Models;
 
 use Core\AbstractModel;
-use Core\ModelQueriesTrait;
 
 class ProductModel extends AbstractModel
 {
-    use ModelQueriesTrait;
-
     /**
      * Nom de la table correspondant au modèle.
      *
@@ -80,11 +77,22 @@ class ProductModel extends AbstractModel
     /**
      * Renvoie la liste des tous les modèles enregistrés.
      *
-     * @return \App\Entities\Product[]|mixed[]
+     * @return mixed[]
      */
     public function all()
     {
-        return $this->fields('id', 'ref', 'artist', 'title', 'details', 'description', 'out_of_stock', 'price', 'purchase_url', 'bandcamp_id', 'created_at', 'updated_at')
-            ->order("created_at ASC")->select();
+        $products = $this->fields('id', 'artist', 'title', 'details', 'description', 'price', 'purchase_url AS purchaseUrl', 'bandcamp_id AS bandcampId', 'DATE_FORMAT(created_at, "%Y-%m-%dT%H:%i:%s.%fZ") AS createdAt', 'DATE_FORMAT(updated_at, "%Y-%m-%dT%H:%i:%s.%fZ") AS updatedAt')
+            ->where("out_of_stock = 0")
+            ->order("created_at DESC")
+            ->toArray()
+            ->select();
+        foreach ($products as &$product) {
+            $product['pictures'] = (new ProductPictureModel())
+                ->fields('id', 'thumb_url AS thumbUrl', 'full_url AS fullUrl')
+                ->where('product_id = ?')
+                ->toArray()
+                ->select([$product['id']]);
+        }
+        return $products;
     }
 }

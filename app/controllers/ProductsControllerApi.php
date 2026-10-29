@@ -2,11 +2,10 @@
 
 namespace App\Controllers;
 
-use App\Controllers;
+use App\Functions\HttpUtils;
 use App\Models\ProductModel;
-use Core\AbstractControllerApi;
 
-class ProductsControllerApi extends AbstractControllerApi
+class ProductsControllerApi
 {
     /**
      * Modèle associé au contrôleur.
@@ -15,20 +14,20 @@ class ProductsControllerApi extends AbstractControllerApi
     protected $model;
 
     /**
-     * Noms des actions permettant d'identifier les formulaires pour la récupération des jetons CSRF.
-     * @var string[]
-     */
-    protected $actions;
-
-    /**
      * Crée une instance du contrôleur et définit ses propriétés.
      */
     public function __construct()
     {
         $this->model = new ProductModel();
-        $this->actions = array_fill_keys(
-            ['create', 'update'],
-            (new ProductsController)->actions['updateOrCreate']
-        );
+    }
+
+    /**
+     * Renvoie une liste de toutes les ressources.
+     *
+     * @route("/products", methods={"GET"})
+     */
+    public function getAll()
+    {
+        HttpUtils::jsonResponse($this->model->all());
     }
 }
