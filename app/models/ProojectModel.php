@@ -64,11 +64,31 @@ class ProojectModel extends AbstractModel
     /**
      * Renvoie la liste des tous les modèles enregistrés.
      *
-     * @return \App\Entities\Prooject[]|mixed[]
+     * @return mixed[]
      */
     public function all()
     {
-        return $this->fields('id', 'slug', 'title', 'created_at', 'updated_at', 'bandcamp_id', 'description', 'concept')
-            ->order("title ASC")->select();
+        $proojects = $this->fields('id', 'slug', 'title', 'DATE_FORMAT(created_at, "%Y-%m-%dT%H:%i:%s.%fZ") AS createdAt', 'DATE_FORMAT(updated_at, "%Y-%m-%dT%H:%i:%s.%fZ") AS updatedAt', 'bandcamp_id AS bandcampId', 'description', 'concept')
+            ->order("updatedAt DESC")
+            ->toArray()->select();
+        foreach ($proojects as &$prooject) {
+            $tracks = (new TrackModel())
+                ->fields('id', 'position', 'bonus', 'artist', 'title', 'url', 'DATE_FORMAT(updated_at, "%Y-%m-%dT%H:%i:%s.%fZ") AS updatedAt', 'bandcamp_id AS bandcampId')
+                ->where('id_prooject = ?')
+                ->order('CAST(position AS UNSIGNED) DESC')
+                ->toArray()
+                ->limit(3)
+                ->select([$prooject['id']]);
+            foreach ($tracks as &$track) {
+                $resTrackInfo = (new TrackInfoModel())
+                    ->fields('content')
+                    ->where('id_track = ?')
+                    ->toArray()
+                    ->select([$track['id']]);
+                $track['info'] = empty($resTrackInfo) ? null : $resTrackInfo[0];
+            }
+            $prooject['tracks'] = $tracks;
+        }
+        return $proojects;
     }
 }

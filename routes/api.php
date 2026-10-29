@@ -19,17 +19,17 @@ Router::get("artists/{slug}", "ArtistsControllerApi", "get");
 Router::get("artists", "ArtistsControllerApi", "getAll");
 
 // Movies
+Router::get("movies/{slug}", "MoviesControllerApi", "get");
 Router::get("movies", "MoviesControllerApi", "getAll");
-Router::get("movies/{id}", "MoviesControllerApi", "get");
 
 // Products
+Router::get("products/{slug}", "ProductsControllerApi", "get");
 Router::get("products", "ProductsControllerApi", "getAll");
-Router::get("products/{id}", "ProductsControllerApi", "get");
 
 // Proojects
+Router::get("proojects/{slug}", "ProojectsControllerApi", "get");
 Router::get("proojects", "ProojectsControllerApi", "getAll");
-Router::get("proojects/{id}", "ProojectsControllerApi", "get");
 
 // Releases
+Router::get("releases/{slug}", "ReleasesControllerApi", "get");
 Router::get("releases", "ReleasesControllerApi", "getAll");
-Router::get("releases/{id}", "ReleasesControllerApi", "get");
