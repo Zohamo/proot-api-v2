@@ -14,12 +14,6 @@ class ArtistsControllerApi
     protected $model;
 
     /**
-     * Noms des actions permettant d'identifier les formulaires pour la récupération des jetons CSRF.
-     * @var string[]
-     */
-    protected $actions;
-
-    /**
      * Crée une instance du contrôleur et définit ses propriétés.
      */
     public function __construct()
@@ -40,19 +34,16 @@ class ArtistsControllerApi
     /**
      * Renvoie la ressource spécifiée.
      *
-     * @param  string $id
-     * @route("/artists/{id}", methods={"GET"})
+     * @param  string $slug
+     * @route("/artists/{slug}", methods={"GET"})
      */
-    public function get($id)
+    public function get($slug)
     {
-        $res = $this->model->toArray()
-            ->where($this->model->pk() . " = ?")
-            ->select([$id]);
-
+        $res = $this->model->first($slug);
         if (empty($res)) {
             HttpUtils::jsonResponse(null, 404);
         } else {
-            HttpUtils::jsonResponse($res[0]);
+            HttpUtils::jsonResponse($res);
         }
     }
 }

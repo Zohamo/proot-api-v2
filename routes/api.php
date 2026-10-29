@@ -15,8 +15,8 @@ use Core\Router;
  */
 
 // Artists
+Router::get("artists/{slug}", "ArtistsControllerApi", "get");
 Router::get("artists", "ArtistsControllerApi", "getAll");
-Router::get("artists/{id}", "ArtistsControllerApi", "get");
 
 // Movies
 Router::get("movies", "MoviesControllerApi", "getAll");
