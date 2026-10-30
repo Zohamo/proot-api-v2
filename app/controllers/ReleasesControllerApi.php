@@ -2,11 +2,10 @@
 
 namespace App\Controllers;
 
-use App\Controllers;
+use App\Functions\HttpUtils;
 use App\Models\ReleaseModel;
-use Core\AbstractControllerApi;
 
-class ReleasesControllerApi extends AbstractControllerApi
+class ReleasesControllerApi
 {
     /**
      * Modèle associé au contrôleur.
@@ -15,20 +14,36 @@ class ReleasesControllerApi extends AbstractControllerApi
     protected $model;
 
     /**
-     * Noms des actions permettant d'identifier les formulaires pour la récupération des jetons CSRF.
-     * @var string[]
-     */
-    protected $actions;
-
-    /**
      * Crée une instance du contrôleur et définit ses propriétés.
      */
     public function __construct()
     {
         $this->model = new ReleaseModel();
-        $this->actions = array_fill_keys(
-            ['create', 'update'],
-            (new ReleasesController)->actions['updateOrCreate']
-        );
+    }
+
+    /**
+     * Renvoie une liste de toutes les ressources.
+     *
+     * @route("/releases", methods={"GET"})
+     */
+    public function getAll()
+    {
+        HttpUtils::jsonResponse($this->model->all());
+    }
+
+    /**
+     * Renvoie la ressource spécifiée.
+     *
+     * @param  string $ref
+     * @route("/releases/{ref}", methods={"GET"})
+     */
+    public function get(string $ref)
+    {
+        $res = $ref === 'last' ? $this->model->last() : $this->model->first($ref);
+        if (empty($res)) {
+            HttpUtils::jsonResponse(null, 404);
+        } else {
+            HttpUtils::jsonResponse($res);
+        }
     }
 }

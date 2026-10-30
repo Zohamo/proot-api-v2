@@ -31,5 +31,5 @@ Router::get("proojects/{slug}", "ProojectsControllerApi", "get");
 Router::get("proojects", "ProojectsControllerApi", "getAll");
 
 // Releases
-Router::get("releases/{slug}", "ReleasesControllerApi", "get");
+Router::get("releases/{ref}", "ReleasesControllerApi", "get");
 Router::get("releases", "ReleasesControllerApi", "getAll");
