@@ -1,10 +1,20 @@
 # Changelog
 
-## [Unreleased]
+## [2.0.0] - 2026-11-01
 
-## [2.0.0] - 2026-10-27
+### Added
 
-Initialisation de l'application avec le **Générateur Tela**.
+- Artists API: getAll + get
+- Movies API: getAll + get
+- Products API: getAll
+- Proojects API: getAll + get
+- Releases API: getAll + get
+
+### Fixed
+
+- Tela/Autoloader: issues loading classes
+- Tela/HttpUtils: CORS policy
+- Tela/QueryBuilderSqlClausesTrait: issue with various leftJoin in model requests
 
 ## Formatage
 

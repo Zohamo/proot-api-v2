@@ -52,7 +52,7 @@ trait QueryBuilderSqlClausesTrait
         if (!isset($this->clauses[$command])) {
             $this->clauses[$command] = "$table ON " . implode(" AND ", $filters);
         } else {
-            $this->clauses[$command] .= " $table ON " . implode(" AND ", $filters);
+            $this->clauses[$command] .= " $command $table ON " . implode(" AND ", $filters);
         }
     }
 
