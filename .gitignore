@@ -4,6 +4,7 @@ logs/*
 !**/.htaccess
 !**/.gitkeep
 .scannerwork
+.env*
 /node_modules
 /sonar-project.properties
 /vendor
