@@ -93,10 +93,10 @@ class ReleaseModel extends AbstractModel
     public function first(...$params)
     {
         $res = $this->fields('id', 'ref', 'slug', 'artist', 'title', 'description', 'style', 'disc_number AS discNumber', 'bandcamp_id AS bandcampId', 'DATE_FORMAT(created_at, "%Y-%m-%dT%H:%i:%s.%fZ") AS createdAt', 'DATE_FORMAT(updated_at, "%Y-%m-%dT%H:%i:%s.%fZ") AS updatedAt')
-            ->where("ref = ?")
+            ->where("ref = ? OR slug = ?")
             ->limit(1)
             ->toArray()
-            ->select([$params[0]]);
+            ->select([$params[0], $params[0]]);
         if (empty($res)) {
             return false;
         }

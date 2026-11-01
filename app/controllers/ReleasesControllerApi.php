@@ -34,7 +34,7 @@ class ReleasesControllerApi
     /**
      * Renvoie la ressource spécifiée.
      *
-     * @param  string $ref
+     * @param  string $ref Référence ou slug de la ressource à récupérer.
      * @route("/releases/{ref}", methods={"GET"})
      */
     public function get(string $ref)
